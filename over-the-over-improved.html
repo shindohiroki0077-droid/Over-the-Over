@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Over the Over - 難波フレンチレストラン</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Noto+Serif+JP:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-cream: #FAF8F3;
+            --color-charcoal: #2C2C2C;
+            --color-gold: #B8956A;
+            --color-gold-light: #D4C4A8;
+            --color-white: #FFFFFF;
+            --font-serif-en: 'Cormorant Garamond', serif;
+            --font-serif-jp: 'Noto Serif JP', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-serif-jp);
+            background-color: var(--color-cream);
+            color: var(--color-charcoal);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ヘッダー */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(250, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(184, 149, 106, 0.2);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif-en);
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            color: var(--color-charcoal);
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-serif-jp);
+            font-size: 0.95rem;
+            color: var(--color-charcoal);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--color-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--color-charcoal) 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(184, 149, 106, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(184, 149, 106, 0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--color-cream);
+            z-index: 1;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif-en);
+            font-size: 5rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 3rem;
+            color: var(--color-gold-light);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background-color: transparent;
+            color: var(--color-cream);
+            border: 1px solid var(--color-gold);
+            text-decoration: none;
+            letter-spacing: 0.15em;
+            transition: all 0.4s ease;
+            font-family: var(--font-serif-jp);
+            font-size: 0.95rem;
+        }
+
+        .cta-button:hover {
+            background-color: var(--color-gold);
+            color: var(--color-charcoal);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(184, 149, 106, 0.3);
+        }
+
+        /* セクション共通スタイル */
+        section {
+            padding: 8rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-family: var(--font-serif-en);
+            font-size: 3rem;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.15em;
+            color: var(--color-charcoal);
+            text-transform: uppercase;
+        }
+
+        /* About セクション */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 2;
+            color: var(--color-charcoal);
+        }
+
+        /* Concept セクション */
+        .concept {
+            background-image: url('6.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            color: var(--color-white);
+        }
+
+        .concept::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .concept > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .concept h2 {
+            color: var(--color-white);
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .concept-item {
+            text-align: center;
+        }
+
+        .concept-number {
+            font-family: var(--font-serif-en);
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--color-gold);
+            margin-bottom: 1rem;
+        }
+
+        .concept-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .concept-description {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: var(--color-gold-light);
+        }
+
+        /* Features セクション */
+        .features {
+            background-color: var(--color-white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--color-cream);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .feature-content {
+            padding: 2rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            color: var(--color-charcoal);
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            line-height: 1.9;
+            color: #666;
+        }
+
+        /* Menu セクション */
+        .menu-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .menu-intro {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+            line-height: 2;
+        }
+
+        .menu-item {
+            background-color: var(--color-white);
+            padding: 3rem;
+            margin-bottom: 2rem;
+            border-left: 3px solid var(--color-gold);
+        }
+
+        .menu-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--color-charcoal);
+            letter-spacing: 0.05em;
+        }
+
+        .menu-price {
+            font-family: var(--font-serif-en);
+            font-size: 1.3rem;
+            color: var(--color-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-description {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: #666;
+        }
+
+        /* Gallery セクション */
+        .gallery {
+            background-color: var(--color-white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(184, 149, 106, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Info セクション */
+        .info {
+            background-color: var(--color-cream);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 0.9rem;
+            color: var(--color-gold);
+            margin-bottom: 1rem;
+            letter-spacing: 0.15em;
+        }
+
+        .info-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-charcoal);
+            color: var(--color-cream);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif-en);
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .footer-info {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--color-gold-light);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-links a {
+            color: var(--color-cream);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-gold);
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            color: var(--color-gold-light);
+            padding-top: 2rem;
+            border-top: 1px solid rgba(184, 149, 106, 0.3);
+        }
+
+        /* フェードインアニメーション */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 5rem 2rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .concept-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .menu-item {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header>
+        <nav>
+            <div class="logo">Over the Over</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#concept">Concept</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#info">Info</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ヒーロー -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Over the Over</h1>
+            <p class="hero-subtitle">難波の隠れ家フレンチレストラン</p>
+            <a href="https://www.tablecheck.com/shops/oto-namba/reserve" target="_blank" class="cta-button">ご予約はこちら</a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about fade-in-section">
+        <h2>About</h2>
+        <div class="about-content">
+            <p>
+                Over the Overは、大阪・難波に佇む隠れ家フレンチレストランです。<br>
+                シェフが厳選した旬の食材を使い、フランス料理の伝統技法をベースに、<br>
+                日本の四季の美しさを表現した料理をお届けいたします。<br><br>
+                落ち着いた空間で、大切な方との特別なひとときをお過ごしください。
+            </p>
+        </div>
+    </section>
+
+    <!-- Concept -->
+    <section id="concept" class="concept fade-in-section">
+        <h2>Concept</h2>
+        <div class="concept-grid">
+            <div class="concept-item">
+                <div class="concept-number">01</div>
+                <h3 class="concept-title">季節の恵み</h3>
+                <p class="concept-description">
+                    日本各地から届く旬の食材を使用し、<br>
+                    四季折々の美味しさをお皿の上に表現します。
+                </p>
+            </div>
+            <div class="concept-item">
+                <div class="concept-number">02</div>
+                <h3 class="concept-title">丁寧な仕事</h3>
+                <p class="concept-description">
+                    フランス料理の伝統技法を守りながら、<br>
+                    一皿一皿に心を込めて仕上げます。
+                </p>
+            </div>
+            <div class="concept-item">
+                <div class="concept-number">03</div>
+                <h3 class="concept-title">心地よい空間</h3>
+                <p class="concept-description">
+                    落ち着いた雰囲気の中で、<br>
+                    ゆっくりとお食事をお楽しみいただけます。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features fade-in-section">
+        <h2>Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="シェフの技" class="feature-image">
+                <div class="feature-content">
+                    <h3 class="feature-title">1. シェフの技</h3>
+                    <p class="feature-description">
+                        フランスで修行を積んだシェフが、確かな技術と感性で、忘れられない一皿をご提供いたします。
+                    </p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80" alt="厳選ワイン" class="feature-image">
+                <div class="feature-content">
+                    <h3 class="feature-title">2. 厳選ワイン</h3>
+                    <p class="feature-description">
+                        ソムリエが選んだ世界各国のワインをご用意。お料理に合わせた最適なペアリングをご提案いたします。
+                    </p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <img src="2.jpg" alt="貸し切り・パーティ" class="feature-image">
+                <div class="feature-content">
+                    <h3 class="feature-title">3. 貸し切り・パーティ</h3>
+                    <p class="feature-description">
+                        記念日や特別なお祝いに、貸し切りでのご利用も承っております。大切な方との思い出づくりをお手伝いいたします。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu" class="menu fade-in-section">
+        <h2>Menu</h2>
+        <div class="menu-content">
+            <p class="menu-intro">
+                季節ごとに変わるコースメニューをご用意しております。<br>
+                お客様のご要望に合わせてカスタマイズも可能です。
+            </p>
+            <div class="menu-item">
+                <h3>ディナーコース</h3>
+                <div class="menu-price">¥8,000 〜 ¥15,000</div>
+                <p class="menu-description">
+                    前菜、スープ、魚料理、肉料理、デザートの本格フレンチコースです。<br>
+                    旬の食材を使った季節感あふれる料理をお楽しみいただけます。<br>
+                    アレルギーや苦手な食材がございましたら、お気軽にご相談ください。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="gallery fade-in-section">
+        <h2>Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80" alt="料理1">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600&q=80" alt="料理2">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="料理3">
+            </div>
+        </div>
+    </section>
+
+    <!-- インフォメーション -->
+    <section id="info" class="info fade-in-section">
+        <h2>Information</h2>
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">店舗名</div>
+                <div class="info-content">Over the Over（おーばー ざ おーばー）</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">住所</div>
+                <div class="info-content">〒556-0011<br>大阪府大阪市浪速区難波中2丁目8-86</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">予算目安</div>
+                <div class="info-content">ディナーコース: ¥8,000〜¥15,000<br>※お客様のご要望に合わせてカスタマイズ可能です</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">電話番号</div>
+                <div class="info-content">TEL. 080-4229-2067</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">アクセス</div>
+                <div class="info-content">地下鉄・南海「なんば」駅より徒歩約5分</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Over the Over</div>
+            <div class="footer-info">
+                〒556-0011 大阪府大阪市浪速区難波中2丁目8-86<br>
+                TEL. 080-4229-2067
+            </div>
+            <div class="footer-links">
+                <a href="https://www.tablecheck.com/shops/oto-namba/reserve" target="_blank">ご予約</a>
+                <a href="https://www.instagram.com/oto_namba/?hl=ja" target="_blank">Instagram</a>
+                <a href="https://retty.me/area/PRE27/ARE94/SUB9501/100001541510/" target="_blank">Retty</a>
+            </div>
+            <div class="copyright">
+                ©2024 Over the Over. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // スクロールアニメーション
+        const fadeInSections = document.querySelectorAll('.fade-in-section');
+        
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        fadeInSections.forEach(section => {
+            fadeInObserver.observe(section);
+        });
+
+        // スムーススクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
